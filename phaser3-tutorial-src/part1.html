@@ -21,7 +21,7 @@
         physics: {
             default: 'arcade',
             arcade : {
-                gravity: {y : 300},
+                gravity: {y : 600},
                 debug: false
             }
         },
@@ -162,7 +162,7 @@
         }
         if (cursors.up.isDown && player.body.touching.down)
         {
-            player.setVelocityY(-330);
+            player.setVelocityY(-500);
         }
     }
 
