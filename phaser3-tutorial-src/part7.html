@@ -42,15 +42,20 @@
     {
         this.load.image('sky', 'assets/sky.png');
         this.load.image('ground', 'assets/platform.png');
+        this.load.image('ladder', 'assets/ladder.png');
         this.load.image('star', 'assets/star.png');
         this.load.image('bomb', 'assets/bomb.png');
         //PRECHARGE DU SPRITESHEET AVEC LES DIFFERENTES POSITIONS DU PERSONNAGE
         this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+
     }
     //ON DETERMINE DANS LA FONCTION CREATE CE QUE FONT NOS ASSETS
     function create ()
     {
         this.add.image(400, 300, 'sky');
+
+
+
 //CREATION D'UN GROUPE POUR LA REPETITION D'UN OBJET
         platforms = this.physics.add.staticGroup();//ON DETERMINE SON EMPLACEMENT ET SA TEXTURE
 
@@ -59,11 +64,15 @@
         platforms.create(600, 400, 'ground');
         platforms.create(50, 250, 'ground');
         platforms.create(750, 220, 'ground');
+
+        this.ladder = this.add.image(200,425, 'ladder').setScale(0.07);
+
 //CREATION DES ACTIONS DU PERSONNAGE
         player = this.physics.add.sprite(100, 450, 'dude');
 
         player.setBounce(0.2);// REBONDISSEMENT DU PERSONNAGE LORSQU'IL SAUTE
         player.setCollideWorldBounds(true);//COLLISION AVEC TOUS LES OBJETS DU JEU
+
 //CREATION DES ANIMATIONS DU PERSONNAGE GRACE AU SPRITESHEET
         this.anims.create({
             key: 'left',
@@ -88,6 +97,8 @@
         cursors = this.input.keyboard.createCursorKeys();
 
         this.physics.add.collider(player, platforms);//AJOUT DE COLLISION ENTRE LE PERSONNAGE ET LES PLATFORMES
+        this.physics.add.collider(this.ladder,this.player);
+
     }
 //LA ON DEFINIT CE QU'IL SE PASSE LORSQU'ON APPUIE SUR TELLE OU TELLE TOUCHE
     function update ()
@@ -115,6 +126,7 @@
         {
             player.setVelocityY(-330);//LE JOUR VA A UNE VITESSE DE 330 VERS LE HAUT
         }
+
     }
 
 </script>
